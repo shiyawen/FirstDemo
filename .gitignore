@@ -1,0 +1,29 @@
+# 依赖
+node_modules/
+package-lock.json
+
+# 环境变量文件（敏感信息）
+.env.local
+.env.production
+
+# 构建输出
+dist/
+build/
+
+# 日志
+*.log
+npm-debug.log*
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# Supabase 配置（可选，建议在 Vercel 后台配置）
+# .env
