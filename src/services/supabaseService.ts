@@ -3,8 +3,13 @@ import type { User, UserProfile } from './userService'
 
 export type { User, UserProfile }
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+// 硬编码 Supabase 配置（适用于 GitHub Pages 部署）
+const HARDCODED_SUPABASE_URL = 'https://gzkpctjtwsqkxhxnyxtw.supabase.co'
+const HARDCODED_SUPABASE_ANON_KEY = 'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm'
+
+// 优先使用环境变量（本地开发），否则使用硬编码（生产环境）
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || HARDCODED_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || HARDCODED_SUPABASE_ANON_KEY
 
 // 调试信息：检查环境变量是否正确加载
 console.log('🔍 Supabase 配置检查:')
