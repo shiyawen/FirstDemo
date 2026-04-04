@@ -5,16 +5,20 @@ export type { User, UserProfile }
 
 // 硬编码 Supabase 配置（适用于 GitHub Pages 部署）
 // 注意：GitHub Pages 不支持环境变量，所以直接使用硬编码值
-const supabaseUrl = 'https://gzkpctjtwsqkxhxnyxtw.supabase.co'
-const supabaseAnonKey = 'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm'
+const getSupabaseConfig = () => {
+  const url = 'https://gzkpctjtwsqkxhxnyxtw.supabase.co'
+  const key = 'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm'
+  return { url, key }
+}
 
 // 调试信息：检查环境变量是否正确加载
+const config = getSupabaseConfig()
 console.log('🔍 Supabase 配置检查:')
-console.log('  - URL:', supabaseUrl ? '✅ 已配置' : '❌ 未配置')
-console.log('  - Key:', supabaseAnonKey ? '✅ 已配置 (长度:' + (supabaseAnonKey?.length || 0) + ')' : '❌ 未配置')
+console.log('  - URL:', config.url ? '✅ 已配置' : '❌ 未配置')
+console.log('  - Key:', config.key ? '✅ 已配置 (长度:' + (config.key?.length || 0) + ')' : '❌ 未配置')
 
 // 检查 Supabase 配置是否存在
-const isSupabaseConfigured = !!(supabaseUrl && supabaseAnonKey)
+const isSupabaseConfigured = !!(config.url && config.key)
 
 if (!isSupabaseConfigured) {
   console.warn('⚠️ Supabase 配置缺失，请检查 .env.local 文件')
@@ -25,7 +29,7 @@ if (!isSupabaseConfigured) {
 
 // 仅在配置存在时创建 Supabase 客户端
 export const supabase = isSupabaseConfigured 
-  ? createClient(supabaseUrl, supabaseAnonKey, {
+  ? createClient(config.url, config.key, {
       global: {
         headers: {
           'Content-Type': 'application/json',
