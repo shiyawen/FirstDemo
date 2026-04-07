@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "envId": "{{env.ENV_ID}}",
+  "envId": "yawen-1g86y8yfc29e5f7b",
   "framework": {
     "name": "codex",
     "plugins": {
