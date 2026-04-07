@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "envId": "{{env.ENV_ID}}",
+  "framework": {
+    "name": "codex",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-website",
+        "inputs": {
+          "buildOutputPath": "dist",
+          "cloudPath": "/",
+          "ignore": [".git", "node_modules", "cloudbaserc.json"]
+        }
+      }
+    }
+  }
+}

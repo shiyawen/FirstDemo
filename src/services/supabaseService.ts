@@ -5,38 +5,33 @@ export type { User, UserProfile }
 
 // 硬编码 Supabase 配置（适用于 GitHub Pages 部署）
 // 注意：GitHub Pages 不支持环境变量，所以直接使用硬编码值
-const getSupabaseConfig = () => {
-  const url = 'https://gzkpctjtwsqkxhxnyxtw.supabase.co'
-  const key = 'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm'
-  return { url, key }
-}
+// 直接使用字符串字面量，避免 Vite 构建优化问题
 
-// 调试信息：检查环境变量是否正确加载
-const config = getSupabaseConfig()
+const SUPABASE_URL = 'https://gzkpctjtwsqkxhxnyxtw.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm'
+
+// 调试信息
 console.log('🔍 Supabase 配置检查:')
-console.log('  - URL:', config.url ? '✅ 已配置' : '❌ 未配置')
-console.log('  - Key:', config.key ? '✅ 已配置 (长度:' + (config.key?.length || 0) + ')' : '❌ 未配置')
+console.log('  - URL:', SUPABASE_URL)
+console.log('  - Key 长度:', SUPABASE_KEY.length)
 
-// 检查 Supabase 配置是否存在
-const isSupabaseConfigured = !!(config.url && config.key)
-
-if (!isSupabaseConfigured) {
-  console.warn('⚠️ Supabase 配置缺失，请检查 .env.local 文件')
-  console.info('📖 应用将回退到 localStorage 模式')
-} else {
-  console.log('✅ Supabase 配置正确，使用云端数据库模式')
-}
-
-// 仅在配置存在时创建 Supabase 客户端
-export const supabase = isSupabaseConfigured 
-  ? createClient(config.url, config.key, {
-      global: {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+// 创建 Supabase 客户端 - 直接使用字符串字面量
+export const supabase = createClient(
+  'https://gzkpctjtwsqkxhxnyxtw.supabase.co',
+  'sb_publishable_FYJ1xx7cguNRIWLeQUkALA_zcpKfMfm',
+  {
+    global: {
+      headers: {
+        'Content-Type': 'application/json',
       },
-    })
-  : null
+    },
+  }
+)
+
+console.log('✅ Supabase 客户端已创建')
+
+// 为了向后兼容，始终返回 true（因为现在已经强制使用 Supabase）
+export const isSupabaseConfigured = true
 
 // 用户数据表操作
 const USERS_TABLE = 'users'
