@@ -9,7 +9,12 @@
         "inputs": {
           "buildOutputPath": "dist",
           "cloudPath": "/",
-          "ignore": [".git", "node_modules", "cloudbaserc.json"]
+          "ignore": [".git", "node_modules", "cloudbaserc.json", "*.md"],
+          "headers": {
+            "/*.html": {
+              "Cache-Control": "no-cache"
+            }
+          }
         }
       }
     }
